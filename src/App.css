@@ -1,3 +1,27 @@
 #root {
   text-align: center;
 }
+*{
+  box-sizing: border-box;
+}
+p {
+  position: relative;
+}
+a {
+  font-size: 1.6rem;
+  display: block;
+  margin: 0.5em;
+  text-decoration: none;
+  color:#333;
+}
+.container {
+  padding: 2.1rem;
+}
+.movieContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.movieContainer > * {
+  flex : 1 1 200px;
+}
