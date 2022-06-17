@@ -4,22 +4,45 @@ import Header from './Header.js'
 import Movie from './Movie.js'
 import Search from './Search.js'
 function App() {
-  
-  
+  const API_URL ='http://www.omdbapi.com/?apikey=44b62668&s='
+  const [loading,setLoading] = useState(true)
+  const [movies,setMovies] = useState([])
+  const [error,setErr] = useState(null)
+  useEffect(() => {
+    fetch(`${API_URL}predestination`)
+      .then(response => response.json())
+      .then(jsonResponse => {
+        setMovies(jsonResponse.Search);
+        setLoading(false);
+      });
+  }, []);
+  const search = searchValue => {
+    setLoading(true);
+    setErr(null)
+    fetch(API_URL+searchValue)
+    .then(response => response.json())
+    .then(jsonResponse => {
+      if (jsonResponse.Response === 'True') {
+      setMovies(jsonResponse.Search);
+      setLoading(false);
+      }
+      else {
+        setErr(jsonResponse.Error)
+        setLoading(false)
+      }
+    });
+
+  }
   return (
     <div className='container'>
       <Header className ='Header' text='Movie Search App'></Header>
-      <Search ></Search>
+      <Search search ={search}></Search>
       <div className='movieContainer'>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
-        <Movie movie = {{"Title":"Predestination","Year":"2014","imdbID":"tt2397535","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTAzODc3NjU1NzNeQTJeQWpwZ15BbWU4MDk5NTQ4NTMx._V1_SX300.jpg"}}></Movie>
+        {loading && !error ? <p>Loading</p> 
+        :error !== null ? <div className="err">{error}</div> 
+        : movies.map((movie,indx)=>{
+          return <Movie key={`${movie.imdbID}-${movie.Title}`} movie = {movie} ></Movie>
+        })}
       </div>
    </div>
    
