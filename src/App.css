@@ -1,21 +1,27 @@
 #root {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 *{
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
 }
-p {
-  position: relative;
+
+h1 {
+  background-color: #4e8397;
+  padding: 1.2rem;
+  color: #e7f3f8;
 }
+
 a {
   font-size: 1.6rem;
   display: block;
-  margin: 0.5em;
+  margin: 0.5em 0;
   text-decoration: none;
   color:#333;
-}
-.container {
-  padding: 2.1rem;
 }
 .movieContainer {
   display: flex;
@@ -23,5 +29,48 @@ a {
   gap: 5px;
 }
 .movieContainer > * {
-  flex : 1 1 200px;
+  flex : 1 1 clamp(200px , 250px,300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+/* styling the search part */
+
+.search , form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem; 
+}
+
+form {
+  
+  border-radius: 1.2em;
+  
+}
+input {
+  display: inline-block;
+  height: 2.5rem;
+  width: 0rem;
+  padding: 1.164em;
+  flex-basis: 100%;
+  text-align: center;
+  background-color: #4e8497;
+  font-size: 1.05rem;
+  outline: 0;
+  border: 0;
+  font-weight: bold;
+  color: #fff ;
+  border-radius: 1.2em;
+  transition: width 300ms ease-in-out;
+}
+
+button {
+  border-radius: 1.2em;
+  margin-left: calc(-30px);
+  border: 0;
+  background-color: #4e8397;
 }
