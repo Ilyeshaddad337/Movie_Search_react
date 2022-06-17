@@ -4,7 +4,7 @@ import Header from './Header.js'
 import Movie from './Movie.js'
 import Search from './Search.js'
 function App() {
-  const API_URL ='http://www.omdbapi.com/?apikey=44b62668&s='
+  const API_URL ='https://www.omdbapi.com/?apikey=44b62668&s='
   const [loading,setLoading] = useState(true)
   const [movies,setMovies] = useState([])
   const [error,setErr] = useState(null)
