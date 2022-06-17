@@ -9,7 +9,7 @@ function App() {
   const [movies,setMovies] = useState([])
   const [error,setErr] = useState(null)
   useEffect(() => {
-    fetch(`${API_URL}predestination`)
+    fetch(`${API_URL}batman`)
       .then(response => response.json())
       .then(jsonResponse => {
         setMovies(jsonResponse.Search);
@@ -39,7 +39,7 @@ function App() {
       <Search search ={search}></Search>
       <div className='movieContainer'>
         {loading && !error ? <p>Loading</p> 
-        :error !== null ? <div className="err">{error}</div> 
+        :error !== null ? <p className="err">{error}</p> 
         : movies.map((movie,indx)=>{
           return <Movie key={`${movie.imdbID}-${movie.Title}`} movie = {movie} ></Movie>
         })}
